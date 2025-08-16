@@ -9,7 +9,8 @@
 
     async function checkWeather(city) {
         const response = await fetch(apiUrl + city + `&appid=${apiKey}`);
-
+ 
+        
 
         if (response.status == 404) {
             document.querySelector(".error").style.display = "block";
@@ -17,7 +18,7 @@
         }
         else {
             var data = await response.json();
-
+            console.log(data);
 
             document.querySelector(".city").innerHTML = data.name;
 
@@ -40,6 +41,25 @@
             } else {
                 weatherIcon.src = "images/weather.png";
             }
+
+
+            // AQI Placeholder
+
+            const lat = data.coord.lat;
+            const lon = data.coord.lon;
+
+           const aqiUrl = `https://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=${apiKey}`;
+
+
+            const aqiresponse = await fetch (aqiUrl);
+
+            const aqiData = await aqiresponse.json();
+            const aqi = aqiData.list[0].main.aqi;
+
+            const aqiText = ["Good " , "Fair", "Moderate", "Poor", "Very Poor"];
+
+            document.querySelector(".aqi").innerHTML = aqiText[aqi - 1];
+            
 
             document.querySelector(".weather").style.display = "block";
             document.querySelector(".error").style.display = "none";
