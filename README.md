@@ -15,3 +15,8 @@ Frontend: HTML , CSS , JavaScript
 
 Get your free API from OpenWeatherMap
 Replace YOUR_API_KEY in  index.js with your key
+
+
+**##Note**
+
+This project helped me understand how APIs work, and I’ll be adding more features to it soon — stay tuned!
